@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.validation.ValidationException;
 
 import org.apache.commons.validator.GenericValidator;
 
@@ -445,4 +446,11 @@ public class PatientService implements IPatientService {
     public String getPCNumber(){
         return getIdentityInfo(PATIENT_PC_NUMBER_IDENTITY);
     }
+
+	public void validatePhoneNumber() {
+		String phone = getPhone();
+		if (phone != null && !phone.matches("\\d{10}")) {
+			throw new ValidationException("Phone number must be exactly 10 digits.");
+		}
+	}
 }

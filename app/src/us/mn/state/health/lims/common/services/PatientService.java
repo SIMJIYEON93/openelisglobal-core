@@ -188,6 +188,18 @@ public class PatientService implements IPatientService {
 		personService = new PersonService(patient.getPerson());
 
 	}
+
+	/**
+	 * NEW: Constructor for Dependency Injection.
+	 * Allows injecting a custom PersonService instance (used for testing).
+	 *
+	 * @param patient        Patient entity
+	 * @param personService  PersonService instance to inject
+	 */
+	public PatientService(Patient patient, PersonService personService) {
+		this.patient = patient;
+		this.personService = personService;
+	}
 	
 	/**
 	 * Gets the patient for the sample and then calls the constructor with patient argument
@@ -446,6 +458,7 @@ public class PatientService implements IPatientService {
     public String getPCNumber(){
         return getIdentityInfo(PATIENT_PC_NUMBER_IDENTITY);
     }
+
 
 	public void validatePhoneNumber() {
 		String phone = getPhone();
